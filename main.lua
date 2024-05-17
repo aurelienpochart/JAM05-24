@@ -5,6 +5,7 @@ local Game = require("modules/game/game")
 function love.load()
     Game:SetTitle("On Fire !")
     Game:SetWindowMode(1920, 1080, {})
+    ScenesManager:SwitchTo("game")
 end
 
 function love.draw()
