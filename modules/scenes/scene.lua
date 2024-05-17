@@ -76,4 +76,12 @@ function Scene:ToggleView(viewName, toggled)
     view:SetActive(toggled)
 end
 
+--- @param views string[]
+--- @return void
+function Scene:LoadViews(views)
+    for _, viewName in ipairs(views) do
+        require(("scenes/%s/views/%s"):format(self.name, viewName))(self)
+    end
+end
+
 return Scene

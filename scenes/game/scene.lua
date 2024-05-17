@@ -17,7 +17,6 @@ Scene:OnKeyPressed(function(key)
     end
 end)
 
-require("scenes/game/views/bar")(Scene)
-require("scenes/game/views/fire")(Scene)
+Scene:LoadViews({"bar", "fire"})
 
 return Scene
