@@ -1,12 +1,15 @@
-local function onLoaded()
-    print("game_bar loaded")
-end
+local inventory = love.graphics.newImage("assets/images/inventory.png")
+local scaleX = 1.8  -- Redimensionner en largeur (2x)
+local scaleY = 1.8  -- Redimensionner en hauteur (2x)
+local positionX = 542  -- Position en X
+local positionY = 720  -- Position en Y
 
 local function onDraw()
-    love.graphics.draw("game_bar", 1000, 300)
+    if inventory then
+        love.graphics.draw(inventory, positionX, positionY, 0, scaleX, scaleY)
+    end
 end
 
---- @param scene Scene
 return function(scene)
     scene:RegisterView("game_bar", onDraw)
 end
