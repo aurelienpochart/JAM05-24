@@ -1,6 +1,10 @@
 local ScenesManager = require("modules/scenes/scenes_manager")
 
 --[[ Love2D Overrides ]]
+function love.load()
+    print("JAM project loaded")
+end
+
 function love.draw()
     ScenesManager.currentScene.onDraw()
 end
