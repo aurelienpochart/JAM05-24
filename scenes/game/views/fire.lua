@@ -1,24 +1,18 @@
-local particleImage = love.graphics.newImage("assets/particles/cloud.png")
-local particleSystem = love.graphics.newParticleSystem(particleImage, 1000)
+local FireParticle = require("modules/particles/fireParticle")
+local fire = FireParticle.New()
 
-local function initParticleSystem()
-    particleSystem:setParticleLifetime(1, 2) -- Durée de vie des particules
-    particleSystem:setEmissionRate(1000)      -- Taux d'émission des particules
-    particleSystem:setSizeVariation(1)       -- Variation de la taille des particules
-    particleSystem:setLinearAcceleration(-10, -10, 10, 10) -- Accélération des particules
-    particleSystem:setColors(1, 0.5, 0, 1, 1, 0.1, 0, 0) -- Couleurs des particules (dégradé)
-    particleSystem:setSpread(math.pi / 8)    -- Diffusion des particules
-    particleSystem:setSpeed(50, 100)        -- Vitesse des particules
-    particleSystem:setDirection(-math.pi / 2)-- Direction des particules (vers le haut
+local function onUpdate(dt)
+    fire.particleSystem:update(dt)
+    if love.keyboard.isDown("space") then
+        fire:explode()
+    end
 end
 
 local function onDraw()
-    particleSystem:update(1 / 60)
-    love.graphics.draw(particleSystem, 800, 300)
+    love.graphics.draw(fire.particleSystem, 920, 540)
 end
 
 --- @param scene Scene
 return function(scene)
-    initParticleSystem()
-    scene:RegisterView("fire", onDraw)
+    scene:RegisterView("fire", onDraw, onUpdate)
 end
