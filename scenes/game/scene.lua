@@ -1,6 +1,10 @@
 local Scene = require("modules/scenes/scene").New("game")
 local Graphics = require("modules/love/graphics")
 
+Scene:OnLoaded(function()
+    Scene:ToggleView("fire", true)
+end)
+
 Scene:OnDraw(function()
     love.graphics.print('Hello World!', 400, 300)
 
@@ -14,5 +18,6 @@ Scene:OnKeyPressed(function(key)
 end)
 
 require("scenes/game/views/bar")(Scene)
+require("scenes/game/views/fire")(Scene)
 
 return Scene
