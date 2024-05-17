@@ -1,8 +1,10 @@
 local ScenesManager = require("modules/scenes/scenes_manager")
+local Game = require("modules/game/game")
 
 --[[ Love2D Overrides ]]
 function love.load()
-    print("JAM project loaded")
+    Game:SetTitle("On Fire !")
+    Game:SetWindowMode(1920, 1080, {})
 end
 
 function love.draw()
@@ -11,6 +13,7 @@ end
 
 --- @param key string
 function love.keypressed(key)
+    Game:OnKeyPressed(key)
     if ScenesManager.currentScene.onKeyPressed then
         ScenesManager.currentScene.onKeyPressed(key)
     end
