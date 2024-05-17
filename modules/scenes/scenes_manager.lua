@@ -3,9 +3,9 @@
 --- @field public currentScene Scene
 local ScenesManager = {}
 
-local availableScenesPath = {
-    "scenes/main_menu", -- Default
-    "scenes/game"
+local availableScenes = {
+    "main_menu", -- Default
+    "game"
 }
 
 local __meta = {
@@ -17,8 +17,8 @@ function ScenesManager.New()
     local self = setmetatable({}, __meta)
     local scenes = {}
 
-    for _, path in ipairs(availableScenesPath) do
-        scenes[#scenes + 1] = require(path)
+    for _, sceneName in ipairs(availableScenes) do
+        scenes[#scenes + 1] = require(("scenes/%s/scene"):format(sceneName))
     end
     
     self.scenes = scenes
@@ -43,7 +43,13 @@ function ScenesManager:SwitchTo(name)
     if not scene then
         return
     end
+    if self.currentScene.onUnloaded then
+        self.currentScene.onUnloaded()
+    end
     self.currentScene = scene
+    if self.currentScene.onLoaded then
+        self.currentScene.onLoaded()
+    end
 end
 
 return ScenesManager.New()

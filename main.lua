@@ -9,7 +9,16 @@ function love.load()
 end
 
 function love.draw()
-    ScenesManager.currentScene.onDraw()
+    local currentScene = ScenesManager.currentScene
+    
+    currentScene.onDraw()
+    for _, sceneView in ipairs(currentScene.views) do
+        if not sceneView.isActive then
+            goto continue
+        end
+        sceneView.onDraw()
+        :: continue ::
+    end
 end
 
 --- @param key string
@@ -19,3 +28,5 @@ function love.keypressed(key)
         ScenesManager.currentScene.onKeyPressed(key)
     end
 end
+
+return { game = Game, scenesManager = ScenesManager }
