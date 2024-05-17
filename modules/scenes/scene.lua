@@ -5,6 +5,7 @@
 --- @field protected onKeyPressed fun(key: string): void
 --- @field protected onLoaded fun(): void
 --- @field protected onUnloaded fun(): void
+--- @field protected onUpdate fun(dt: number): void
 local Scene = {}
 
 local View = require("modules/scenes/view")
@@ -45,6 +46,12 @@ end
 --- @return void
 function Scene:OnKeyPressed(onKeyPressedFn)
     self.onKeyPressed = onKeyPressedFn
+end
+
+--- @param onUpdateFn fun(dt: number): void
+--- @return void
+function Scene:OnUpdate(onUpdateFn)
+    self.onUpdate = onUpdateFn
 end
 
 --- @param name string
