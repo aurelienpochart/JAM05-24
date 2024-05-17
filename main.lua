@@ -1,7 +1,7 @@
 local ScenesManager = require("modules/scenes/scenes_manager")
 local Game = require("modules/game/game")
 
-local Controllers = { game = Game, scenesManager = ScenesManager } 
+_G.Controllers = { game = Game, scenesManager = ScenesManager } 
 
 --[[ Love2D Overrides ]]
 function love.load()
@@ -46,5 +46,3 @@ function love.keypressed(key)
         ScenesManager.currentScene.onKeyPressed(key)
     end
 end
-
-return Controllers
