@@ -23,6 +23,9 @@ function ScenesManager.New()
     
     self.scenes = scenes
     self.currentScene = self.scenes[1]
+    if self.currentScene.onLoaded then
+        self.currentScene.onLoaded()
+    end
     return self
 end
 

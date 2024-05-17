@@ -9,7 +9,7 @@ local LoveGraphics = {}
 --- @param ry number
 --- @param segments number
 function LoveGraphics.DrawRect(mode, x, y, width, height, rx, ry, segments)
-    love.graphics.rectangle("fill", 20,50, 60,120)
+    love.graphics.rectangle(mode, x, y, width, height, rx, ry, segments)
 end
 
 return LoveGraphics
