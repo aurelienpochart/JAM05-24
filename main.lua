@@ -7,7 +7,21 @@ local Controllers = { game = Game, scenesManager = ScenesManager }
 function love.load()
     Game:SetTitle("On Fire !")
     Game:SetWindowMode(1920, 1080, {})
-    ScenesManager:SwitchTo("game")
+end
+
+function love.update(dt)
+    local currentScene = ScenesManager.currentScene
+
+    if currentScene.onUpdate then
+        currentScene.onUpdate(dt)
+    end
+    for _, sceneView in ipairs(currentScene.views) do
+        if not sceneView.isActive then
+            goto continue
+        end
+        sceneView.onUpdate(dt)
+        :: continue ::
+    end
 end
 
 function love.draw()
