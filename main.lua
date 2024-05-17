@@ -19,7 +19,9 @@ function love.update(dt)
         if not sceneView.isActive then
             goto continue
         end
-        sceneView.onUpdate(dt)
+        if sceneView.onUpdate then
+            sceneView.onUpdate(dt)
+        end
         :: continue ::
     end
 end
