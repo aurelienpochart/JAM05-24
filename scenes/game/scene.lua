@@ -3,6 +3,7 @@ local Graphics = require("modules/love/graphics")
 
 Scene:OnLoaded(function()
     Scene:ToggleView("fire", true)
+    Scene:ToggleView("game_bar", true)
 end)
 
 Scene:OnDraw(function()
@@ -17,6 +18,6 @@ Scene:OnKeyPressed(function(key)
     end
 end)
 
-Scene:LoadViews({"bar", "fire"})
+Scene:LoadViews({"bar", "fire", "game_bar"})
 
 return Scene
