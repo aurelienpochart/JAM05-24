@@ -7,7 +7,6 @@ _G.Controllers = { game = Game, scenesManager = ScenesManager }
 function love.load()
     Game:SetTitle("On Fire !")
     Game:SetWindowMode(1920, 1080, {})
-    ScenesManager:SwitchTo("game")
 end
 
 function love.update(dt)
