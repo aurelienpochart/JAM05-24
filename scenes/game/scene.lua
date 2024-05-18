@@ -5,9 +5,7 @@ Scene:OnLoaded(function()
     Scene:ToggleView("fire", true)
     Scene:ToggleView("game_bar", true)
     Scene:ToggleView("bg_game", true)
-    Scene:ToggleView("sodium", true)
-    Scene:ToggleView("magnesium", true)
-    Scene:ToggleView("soufre", true)
+    Scene:ToggleView("elements", true)
 end)
 
 Scene:OnDraw(function()
@@ -21,12 +19,10 @@ Scene:OnKeyPressed(function(key)
     end
     if key == "e" then
         Scene:ToggleView("game_bar", not Scene:GetView("game_bar").isActive)
-        Scene:ToggleView("sodium", not Scene:GetView("sodium").isActive)
-        Scene:ToggleView("magnesium", not Scene:GetView("magnesium").isActive)
-        Scene:ToggleView("soufre", not Scene:GetView("soufre").isActive)
+        Scene:ToggleView("elements", not Scene:GetView("elements").isActive)
     end
 end)
 
-Scene:LoadViews({"bg_game", "fire", "game_bar", "bar", "sodium", "magnesium", "soufre"})
+Scene:LoadViews({"bg_game", "fire", "game_bar", "bar", "elements"})
 
 return Scene
