@@ -17,7 +17,7 @@ local __meta = {
 --- @param onLoaded fun(): void
 --- @param onUnloaded fun(): void
 --- @return View
-function View.New(name, onDraw, onUpdate, onLoaded, onUnloaded)
+function View.New(name, onDraw, onUpdate, onKeyPressed, onLoaded, onUnloaded)
     local self = setmetatable({}, __meta)
     
     self.name = name
@@ -25,6 +25,7 @@ function View.New(name, onDraw, onUpdate, onLoaded, onUnloaded)
     self.onUpdate = onUpdate
     self.onLoaded = onLoaded
     self.onUnloaded = onUnloaded
+    self.onKeyPressed = onKeyPressed
     self.isActive = false
     return self
 end

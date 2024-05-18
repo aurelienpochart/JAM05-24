@@ -5,6 +5,25 @@ local __meta = {
     __index = FireParticle
 }
 
+_G.Colors = {
+    White = {255, 255, 255, 255},
+    Black = {0, 0, 0, 255},
+    Red = {255, 0, 0, 255},
+    Green = {0, 255, 0, 255},
+    Blue = {0, 0, 255, 255},
+    Yellow = {255, 255, 0, 255},
+    Cyan = {0, 255, 255, 255},
+    Magenta = {255, 0, 255, 255},
+    Orange = {255, 165, 0, 255},
+    Purple = {128, 0, 128, 255},
+    Pink = {255, 192, 203, 255},
+    Brown = {165, 42, 42, 255},
+    Grey = {128, 128, 128, 255},
+    LightGrey = {211, 211, 211, 255},
+    DarkGrey = {169, 169, 169, 255},
+    Transparent = {0, 0, 0, 0}
+}
+
 function FireParticle.New()
     local self = setmetatable({}, __meta)
     local particleImage = love.graphics.newImage("assets/particles/TEX_FB_Torch_8x8.png")
@@ -31,15 +50,20 @@ function FireParticle:SetDefaultParticleSettings()
     self.particleSystem:setSpeed(50, 100) -- Vitesse réduite pour une montée plus lente
 end
 
-function FireParticle:explode()
-    for i = 1, 100 do
+function FireParticle:Explode()
+    local time = love.timer.getTime()
+
+    while love.timer.getTime() - time < 0.01 do
         self.particleSystem:setDirection(math.random() * math.pi * 2)
         self.particleSystem:setLinearAcceleration(-100, -100, 100, 100)
         self.particleSystem:setSpeed(50, 200)
         self.particleSystem:emit(1)
     end
-    self.particleSystem:setDirection(-math.pi / 2)
     self:SetDefaultParticleSettings()
+end
+
+function FireParticle:SetColors(...)
+    self.particleSystem:setColors(...)
 end
 
 return FireParticle
