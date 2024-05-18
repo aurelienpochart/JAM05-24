@@ -24,12 +24,18 @@ _G.Colors = {
     Transparent = {0, 0, 0, 0}
 }
 
-function FireParticle.New()
+function FireParticle.New(cx, cy, isWhite)
     local self = setmetatable({}, __meta)
-    local particleImage = love.graphics.newImage("assets/particles/TEX_FB_Torch_8x8.png")
-
+    local particleImage
+    if isWhite == true then
+        particleImage = love.graphics.newImage("assets/particles/TEX_FB_Torch_8x8_WHITE.png")
+    else
+        particleImage = love.graphics.newImage("assets/particles/TEX_FB_Torch_8x8.png")
+    end
     self.quads = temp:constructFlipbook(particleImage, 8, 8)
     self.particleSystem = love.graphics.newParticleSystem(particleImage, 500)
+    self.cx = cx
+    self.cy = cy
     self:SetDefaultParticleSettings()
     return self
 end
@@ -48,6 +54,7 @@ function FireParticle:SetDefaultParticleSettings()
     self.particleSystem:setLinearAcceleration(-25, -50, 25, -100) -- Accélération vers le haut pour simuler la convergence
     self.particleSystem:setDirection(-math.pi / 2) -- Direction vers le haut
     self.particleSystem:setSpeed(50, 100) -- Vitesse réduite pour une montée plus lente
+    self.particleSystem:setPosition(self.cx, self.cy)
 end
 
 function FireParticle:Explode()
@@ -56,10 +63,10 @@ function FireParticle:Explode()
     while love.timer.getTime() - time < 0.01 do
         self.particleSystem:setDirection(math.random() * math.pi * 2)
         self.particleSystem:setLinearAcceleration(-100, -100, 100, 100)
-        self.particleSystem:setSpeed(50, 200)
+        self.particleSystem:setSpeed(600, 900)
         self.particleSystem:emit(1)
     end
-    self:SetDefaultParticleSettings()
+    self.particleSystem:setEmissionRate(0)
 end
 
 function FireParticle:SetColors(...)

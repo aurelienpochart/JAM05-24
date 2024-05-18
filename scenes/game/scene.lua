@@ -6,9 +6,7 @@ Scene:OnLoaded(function()
 end)
 
 Scene:OnDraw(function()
-    love.graphics.print('Hello World!', 400, 300)
-
-    Graphics.DrawRect("fill", 20,50, 8000,800)
+    --Graphics.DrawRect("fill", 20,50, 8000,800)
 end)
 
 Scene:OnKeyPressed(function(key)
