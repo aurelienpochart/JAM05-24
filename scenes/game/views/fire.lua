@@ -3,8 +3,11 @@ local fire = FireParticle.New()
 
 local function onUpdate(dt)
     fire.particleSystem:update(dt)
-    if love.keyboard.isDown("space") then
-        fire:explode()
+end
+
+local function onKeyPressed(key)
+    if key == "space" then
+        fire:Explode()
     end
 end
 
@@ -14,5 +17,5 @@ end
 
 --- @param scene Scene
 return function(scene)
-    scene:RegisterView("fire", onDraw, onUpdate)
+    scene:RegisterView("fire", onDraw, onUpdate, onKeyPressed)
 end

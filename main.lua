@@ -44,5 +44,14 @@ function love.keypressed(key)
     Game:OnKeyPressed(key)
     if ScenesManager.currentScene.onKeyPressed then
         ScenesManager.currentScene.onKeyPressed(key)
+        for _, sceneView in ipairs(ScenesManager.currentScene.views) do
+            if not sceneView.isActive then
+                goto continue
+            end
+            if sceneView.onKeyPressed then
+                sceneView.onKeyPressed(key)
+            end
+            :: continue ::
+        end
     end
 end
