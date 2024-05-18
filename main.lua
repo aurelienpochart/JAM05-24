@@ -1,7 +1,6 @@
 local ScenesManager = require("modules/scenes/scenes_manager")
 local Game = require("modules/game/game")
-
-_G.Controllers = { game = Game, scenesManager = ScenesManager } 
+_G.Controllers = { game = Game, scenesManager = ScenesManager }
 
 --[[ Love2D Overrides ]]
 function love.load()
