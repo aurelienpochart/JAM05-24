@@ -4,7 +4,6 @@ local FireParticle = {}
 local __meta = {
     __index = FireParticle
 }
-
 _G.Colors = {
     White = {255, 255, 255, 255},
     Black = {0, 0, 0, 255},
@@ -21,14 +20,18 @@ _G.Colors = {
     Grey = {128, 128, 128, 255},
     LightGrey = {211, 211, 211, 255},
     DarkGrey = {169, 169, 169, 255},
-    Transparent = {0, 0, 0, 0}
+    Transparent = {0, 0, 0, 0},
+    LightBlue = {119, 181, 181, 254},
 }
 
-function FireParticle.New(cx, cy, isWhite)
+
+function FireParticle.New(cx, cy, color)
     local self = setmetatable({}, __meta)
     local particleImage
-    if isWhite == true then
+    if color == 0 then
         particleImage = love.graphics.newImage("assets/particles/TEX_FB_Torch_8x8_WHITE.png")
+    elseif color == 1 then
+        particleImage = love.graphics.newImage("assets/particles/TEX_FB_Torch_8x8_PALEBLUE.png")
     else
         particleImage = love.graphics.newImage("assets/particles/TEX_FB_Torch_8x8.png")
     end
@@ -63,7 +66,7 @@ function FireParticle:Explode()
     while love.timer.getTime() - time < 0.01 do
         self.particleSystem:setDirection(math.random() * math.pi * 2)
         self.particleSystem:setLinearAcceleration(-100, -100, 100, 100)
-        self.particleSystem:setSpeed(600, 900)
+        self.particleSystem:setSpeed(250, 2500)
         self.particleSystem:emit(1)
     end
     self.particleSystem:setEmissionRate(0)

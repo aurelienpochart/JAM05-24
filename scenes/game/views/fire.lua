@@ -10,6 +10,12 @@ local currentElement = "";
 local elementCount = 0;
 local electricVisible = false;
 
+local function performExplosion()
+    explode = true
+    explosion:Explode()
+    fire.particleSystem:reset()
+end
+
 function _G.Fire.addElement(name)
     if currentElement == "" then
         currentElement = name
@@ -18,11 +24,54 @@ function _G.Fire.addElement(name)
 end
 
 local function onSodium()
-    fire = FireParticle.New(920, 540, true)
-    fire.particleSystem:setColors(Colors.Yellow)
+    fire = FireParticle.New(920, 540, 0)
+    fire:SetColors(Colors.Yellow)
 end
 
+local function onSodiumPlusPotassium()
+    electric:SetColors(Colors.Yellow, Colors.Purple)
+    electricVisible = true
+end
 
+local function onSodiumPlusCuivre()
+    fire:SetColors(Colors.Yellow, Colors.Purple, Colors.White)
+    electricVisible = true
+    electric:SetColors(Colors.Yellow)
+end
+
+local function onMagnesium()
+    fire = FireParticle.New(920, 540, 0)
+    fire:SetColors(Colors.White)
+end
+
+local function onMagnesiumPlusSoufre()
+    if explode == true then
+        return
+    end
+    explosion = FireParticle.New(920, 540, 0)
+    performExplosion()
+end
+
+local function onMagnesiumPlusSodium()
+    fire:SetColors(Colors.White, Colors.Yellow, Colors.White, Colors.Yellow)
+end
+
+local function onSouffre()
+    fire = FireParticle.New(920, 540, 1)
+end
+
+local function onSouffrePlusPotassium()
+    fire:SetColors(Colors.Purple, Colors.LightBlue, Colors.Purple,  Colors.LightBlue)
+end
+
+local function onSouffrePlusCuivre()
+    if explode == true then
+        return
+    end
+    explosion = FireParticle.New(920, 540, 1)
+    explosion:SetColors(Colors.Cyan)
+    performExplosion()
+end
 
 local function onUpdate(dt)
     if electricVisible then
@@ -33,7 +82,6 @@ local function onUpdate(dt)
     if explode == true then
         explosion.particleSystem:update(dt)
         if love.timer.getTime() - timer > 2 then
-            print("Explode")
             explode = false
             timer = love.timer.getTime()
         end
@@ -47,9 +95,17 @@ local function onKeyPressed(key)
         explode = true
         explosion.particleSystem:reset()
         explosion:Explode()
+        fire.particleSystem:reset()
     end
     if key == "b" then
         onSodium()
+        onSodiumPlusCuivre()
+        --onMagnesium()
+        --onMagnesiumPlusSodium()
+        --onMagnesiumPlusSoufre()
+        --onSouffre()
+        --onSouffrePlusPotassium()
+        --onSouffrePlusCuivre()
     end
 end
 

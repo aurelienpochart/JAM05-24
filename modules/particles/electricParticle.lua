@@ -38,4 +38,8 @@ function ElectricParticle:SetDefaultSettings()
     self.particleSystem:setLinearDamping(0, 0)
 end
 
+function ElectricParticle:SetColors(...)
+    self.particleSystem:setColors(...)
+end
+
 return ElectricParticle
