@@ -10,6 +10,16 @@ local currentElement = "";
 local elementCount = 0;
 local electricVisible = false;
 
+local function onReset()
+    electric.particleSystem:reset()
+    explosion.particleSystem:reset()
+    explode = false
+    electricVisible = false
+    currentElement = ""
+    elementCount = 0
+    fire = FireParticle.New(920, 540)
+end
+
 local function performExplosion()
     explode = true
     explosion:Explode()
@@ -87,7 +97,9 @@ function _G.Fire.addElement(name)
     if currentElement == "" then
         currentElement = name
     end
+    print(name)
     elementCount = elementCount + 1
+    print(elementCount)
     if name == "sodium" and elementCount == 1 then
         onSodium()
     end
@@ -127,13 +139,7 @@ local function onKeyPressed(key)
         fire.particleSystem:reset()
     end
     if key == "r" then
-        fire.particleSystem:reset()
-        electric.particleSystem:reset()
-        explosion.particleSystem:reset()
-        explode = false
-        electricVisible = false
-        currentElement = ""
-        elementCount = 0
+        onReset()
     end
 end
 
