@@ -10,11 +10,27 @@ local currentElement = "";
 local elementCount = 0;
 local electricVisible = false;
 
+local function setElectricityVisible(toggled)
+    if toggled then
+        local sfx = love.audio.newSource("assets/sfx/fire_sparks.ogg", "static")
+        sfx:setVolume(0.90)
+        sfx:setLooping(true)
+        sfx:play()
+        fire.elecSfx = sfx
+    else
+        if fire.elecSfx then
+            fire.elecSfx:stop()
+            fire.elecSfx:release()
+        end
+    end
+    electricVisible = toggled
+end
+
 local function onReset()
     electric.particleSystem:reset()
     explosion.particleSystem:reset()
     explode = false
-    electricVisible = false
+    setElectricityVisible(false)
     currentElement = ""
     elementCount = 0
     fire = FireParticle.New(920, 540)
@@ -33,13 +49,13 @@ end
 
 local function onSodiumPlusPotassium()
     electric:SetColors(Colors.Yellow, Colors.Purple)
-    electricVisible = true
+    setElectricityVisible(true)
 end
 
 local function onSodiumPlusCuivre()
     fire = FireParticle.New(920, 540, 0)
     fire:SetColors(Colors.Yellow, Colors.Purple, Colors.White)
-    electricVisible = true
+    setElectricityVisible(true)
     electric:SetColors(Colors.Yellow)
 end
 
@@ -86,7 +102,7 @@ end
 
 local function onPotassiumPlusMagnesium()
     electric:SetColors(Colors.Purple, Colors.White, Colors.Purple, Colors.White)
-    electricVisible = true
+    setElectricityVisible(true)
 end
 
 local function onPotassiumPlusSoufre()
@@ -109,7 +125,7 @@ end
 
 local function onCuivrePlusPotassium()
     electric:SetColors(Colors.Green, Colors.Purple, Colors.Green, Colors.Purple)
-    electricVisible = true
+    setElectricityVisible(true)
 end
 
 local function onUpdate(dt)
