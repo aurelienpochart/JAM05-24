@@ -62,8 +62,12 @@ function FireParticle:SetDefaultParticleSettings()
 end
 
 function FireParticle:Explode()
+    local sfx = love.audio.newSource("assets/sfx/fire_blast.ogg", "static")
+    sfx:seek(1, "seconds")
+    sfx:setVolume(0.90)
+    love.audio.play(sfx)
     local time = love.timer.getTime()
-
+    
     while love.timer.getTime() - time < 0.01 do
         self.particleSystem:setDirection(math.random() * math.pi * 2)
         self.particleSystem:setLinearAcceleration(-100, -100, 100, 100)
