@@ -30,6 +30,6 @@ Scene:OnKeyPressed(function(key)
     end
 end)
 
-Scene:LoadViews({"bg_game", "fire", "game_bar", "elements"})
+Scene:LoadViews({"bg_game", "game_bar", "fire", "elements"})
 
 return Scene

@@ -210,6 +210,15 @@ local function onDraw()
     if explode == true then
         love.graphics.draw(explosion.particleSystem, 0, 0)
     end
+    if elementCount > 1 then
+        love.graphics.setColor(0, 0, 0)  -- Red color
+        love.graphics.print("Max elements combinaison reached ", 650, 750, 0, 0.2, 0.2)
+        love.graphics.setColor(1,0,0)
+        love.graphics.print("press 'r'", 1040, 750, 0, 0.2, 0.2)
+        love.graphics.setColor(0, 0, 0)  -- Red color
+        love.graphics.print(" to reset", 1120, 750, 0, 0.2, 0.2)
+        love.graphics.setColor(1, 1, 1) -- White color
+    end
 end
 
 --- @param scene Scene
