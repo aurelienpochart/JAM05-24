@@ -11,10 +11,10 @@ local buttons = {
         end
     },
     {
-        label = "Boutique",
-        xOffset = 245,
+        label = "Quitter",
+        xOffset = 300,
         onClick = function()
-            
+            os.exit()
         end
     },
     {
