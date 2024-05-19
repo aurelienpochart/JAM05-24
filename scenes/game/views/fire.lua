@@ -146,6 +146,9 @@ local function onUpdate(dt)
 end
 
 function _G.Fire.addElement(name)
+    local sfx = love.audio.newSource(("assets/sfx/pyro%s.ogg"):format(math.random(5)), "static")
+    sfx:setVolume(0.65)
+    sfx:play()
     local singleElementActions = {
         sodium = onSodium,
         magnesium = onMagnesium,
