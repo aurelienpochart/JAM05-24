@@ -2,6 +2,10 @@ local Scene = require("modules/scenes/scene").New("game")
 local Graphics = require("modules/love/graphics")
 
 Scene:OnLoaded(function()
+    local sfx = love.audio.newSource("assets/sfx/baptiste.ogg", "static")
+    sfx:setVolume(0.90)
+    sfx:play()
+    
     Scene:ToggleView("fire", true)
     Scene:ToggleView("game_bar", true)
     Scene:ToggleView("bg_game", true)
