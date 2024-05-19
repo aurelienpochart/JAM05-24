@@ -21,7 +21,7 @@ local buttons = {
         label = "Credits",
         xOffset = 300,
         onClick = function()
-            
+            Scene:ToggleView("credits", not Scene:GetView("credits").isActive)
         end
     }
 }
@@ -113,5 +113,7 @@ Scene:OnKeyPressed(function(key)
         return
     end
 end)
+
+Scene:LoadViews({"credits"})
 
 return Scene
