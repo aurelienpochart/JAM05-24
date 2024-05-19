@@ -21,6 +21,7 @@ function _G.Fire.addElement(name)
         currentElement = name
     end
     elementCount = elementCount + 1
+    print(name)
 end
 
 local function onSodium()

@@ -1,5 +1,5 @@
 local function onDraw()
-    love.graphics.clear(1, 1, 1, 1)
+    --love.graphics.clear(1, 1, 1, 1)
 end
 
 return function(scene)
