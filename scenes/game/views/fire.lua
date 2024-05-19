@@ -37,6 +37,7 @@ local function onSodiumPlusPotassium()
 end
 
 local function onSodiumPlusCuivre()
+    fire = FireParticle.New(920, 540, 0)
     fire:SetColors(Colors.Yellow, Colors.Purple, Colors.White)
     electricVisible = true
     electric:SetColors(Colors.Yellow)
@@ -56,6 +57,7 @@ local function onMagnesiumPlusSoufre()
 end
 
 local function onMagnesiumPlusSodium()
+    fire = FireParticle.New(920, 540, 0)
     fire:SetColors(Colors.White, Colors.Yellow, Colors.White, Colors.Yellow)
 end
 
@@ -64,6 +66,7 @@ local function onSouffre()
 end
 
 local function onSouffrePlusPotassium()
+    fire = FireParticle.New(920, 540, 1)
     fire:SetColors(Colors.Purple, Colors.LightBlue, Colors.Purple,  Colors.LightBlue)
 end
 
@@ -94,6 +97,21 @@ local function onPotassiumPlusSoufre()
     performExplosion()
 end
 
+local function onCuivre()
+    fire = FireParticle.New(920, 540)
+    fire:SetColors(Colors.Green)
+end
+
+local function onCuivrePlusSodium()
+    fire = FireParticle.New(920, 540)
+    fire:SetColors(Colors.Green, Colors.Yellow, Colors.Green, Colors.Yellow)
+end
+
+local function onCuivrePlusPotassium()
+    electric:SetColors(Colors.Green, Colors.Purple, Colors.Green, Colors.Purple)
+    electricVisible = true
+end
+
 local function onUpdate(dt)
     if electricVisible then
         electric.particleSystem:update(dt)
@@ -117,6 +135,7 @@ function _G.Fire.addElement(name)
         magnesium = onMagnesium,
         soufre = onSouffre,
         potassium = onPotassium,
+        cuivre = onCuivre,
     }
     local combinedElementActions = {
         sodium = {
@@ -139,8 +158,9 @@ function _G.Fire.addElement(name)
             soufre = onPotassiumPlusSoufre,
         },
         cuivre = {
-            sodium = onSodiumPlusCuivre,
+            sodium = onCuivrePlusSodium,
             soufre = onSouffrePlusCuivre,
+            potassium = onCuivrePlusPotassium,
         }
     }
 
