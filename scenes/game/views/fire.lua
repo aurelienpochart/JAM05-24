@@ -97,9 +97,7 @@ function _G.Fire.addElement(name)
     if currentElement == "" then
         currentElement = name
     end
-    print(name)
     elementCount = elementCount + 1
-    print(elementCount)
     if name == "sodium" and elementCount == 1 then
         onSodium()
     end
