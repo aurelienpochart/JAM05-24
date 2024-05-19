@@ -16,14 +16,6 @@ local function performExplosion()
     fire.particleSystem:reset()
 end
 
-function _G.Fire.addElement(name)
-    if currentElement == "" then
-        currentElement = name
-    end
-    elementCount = elementCount + 1
-    print(name)
-end
-
 local function onSodium()
     fire = FireParticle.New(920, 540, 0)
     fire:SetColors(Colors.Yellow)
@@ -91,6 +83,42 @@ local function onUpdate(dt)
     end
 end
 
+function _G.Fire.addElement(name)
+    if currentElement == "" then
+        currentElement = name
+    end
+    elementCount = elementCount + 1
+    if name == "sodium" and elementCount == 1 then
+        onSodium()
+    end
+    if name == "magnesium" and elementCount == 1 then
+        onMagnesium()
+    end
+    if name == "soufre" and elementCount == 1 then
+        onSouffre()
+    end
+    if elementCount == 2 then
+        if (currentElement == "sodium" and name == "potassium") or (currentElement == "potassium" and name == "sodium") then
+            onSodiumPlusPotassium()
+        end
+        if (currentElement == "sodium" and name == "cuivre") or (currentElement == "cuivre" and name == "sodium") then
+            onSodiumPlusCuivre()
+        end
+        if (currentElement == "magnesium" and name == "soufre") or (currentElement == "soufre" and name == "magnesium") then
+            onMagnesiumPlusSoufre()
+        end
+        if (currentElement == "magnesium" and name == "sodium") or (currentElement == "sodium" and name == "magnesium") then
+            onMagnesiumPlusSodium()
+        end
+        if (currentElement == "soufre" and name == "potassium") or (currentElement == "potassium" and name == "soufre") then
+            onSouffrePlusPotassium()
+        end
+        if (currentElement == "soufre" and name == "cuivre") or (currentElement == "cuivre" and name == "soufre") then
+            onSouffrePlusCuivre()
+        end
+    end
+end
+
 local function onKeyPressed(key)
     if key == "space" and explode == false then
         explode = true
@@ -98,15 +126,14 @@ local function onKeyPressed(key)
         explosion:Explode()
         fire.particleSystem:reset()
     end
-    if key == "b" then
-        onSodium()
-        onSodiumPlusCuivre()
-        --onMagnesium()
-        --onMagnesiumPlusSodium()
-        --onMagnesiumPlusSoufre()
-        --onSouffre()
-        --onSouffrePlusPotassium()
-        --onSouffrePlusCuivre()
+    if key == "r" then
+        fire.particleSystem:reset()
+        electric.particleSystem:reset()
+        explosion.particleSystem:reset()
+        explode = false
+        electricVisible = false
+        currentElement = ""
+        elementCount = 0
     end
 end
 
