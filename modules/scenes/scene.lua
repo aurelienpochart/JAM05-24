@@ -57,10 +57,11 @@ end
 --- @param name string
 --- @param onDraw fun(): void
 --- @param onUpdate fun(dt: number): void
+--- @param onKeyPressed fun(key: string): void
 --- @param onLoaded fun(): void
 --- @param onUnloaded fun(): void
-function Scene:RegisterView(name, onDraw, onUpdate, onLoaded, onUnloaded)
-    self.views[#self.views + 1] = View.New(name, onDraw, onUpdate, onLoaded, onUnloaded)
+function Scene:RegisterView(name, onDraw, onUpdate, onKeyPressed, onLoaded, onUnloaded)
+    self.views[#self.views + 1] = View.New(name, onDraw, onUpdate, onKeyPressed, onLoaded, onUnloaded)
 end
 
 --- @param name string

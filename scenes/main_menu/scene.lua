@@ -12,7 +12,7 @@ local buttons = {
     },
     {
         label = "Quitter",
-        xOffset = 300,
+        xOffset = 290,
         onClick = function()
             os.exit()
         end

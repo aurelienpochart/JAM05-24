@@ -6,6 +6,11 @@ Scene:OnLoaded(function()
     Scene:ToggleView("game_bar", true)
     Scene:ToggleView("bg_game", true)
     Scene:ToggleView("elements", true)
+    
+    Scene.sfx = love.audio.newSource("assets/sfx/fire.ogg", "static")
+    Scene.sfx:setVolume(0.30)
+    Scene.sfx:setLooping(true)
+    Scene.sfx:play()
 end)
 
 Scene:OnDraw(function()
