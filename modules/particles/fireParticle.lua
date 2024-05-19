@@ -22,6 +22,7 @@ _G.Colors = {
     DarkGrey = {169, 169, 169, 255},
     Transparent = {0, 0, 0, 0},
     LightBlue = {119, 181, 181, 254},
+    DarkPurple = {102, 0, 102, 255},
 }
 
 

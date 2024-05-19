@@ -76,6 +76,24 @@ local function onSouffrePlusCuivre()
     performExplosion()
 end
 
+local function onPotassium()
+    fire = FireParticle.New(920, 540, 2)
+    fire:SetColors(Colors.DarkPurple, Colors.DarkPurple, Colors.DarkPurple, Colors.DarkPurple)
+end
+
+local function onPotassiumPlusMagnesium()
+    electric:SetColors(Colors.Purple, Colors.White, Colors.Purple, Colors.White)
+    electricVisible = true
+end
+
+local function onPotassiumPlusSoufre()
+    fire = FireParticle.New(920, 540, 1)
+    fire:SetColors(Colors.DarkPurple, Colors.DarkPurple, Colors.DarkPurple, Colors.DarkPurple)
+    explosion = FireParticle.New(920, 540, 1)
+    explosion:SetColors(Colors.Blue)
+    performExplosion()
+end
+
 local function onUpdate(dt)
     if electricVisible then
         electric.particleSystem:update(dt)
@@ -94,38 +112,47 @@ local function onUpdate(dt)
 end
 
 function _G.Fire.addElement(name)
+    local singleElementActions = {
+        sodium = onSodium,
+        magnesium = onMagnesium,
+        soufre = onSouffre,
+        potassium = onPotassium,
+    }
+    local combinedElementActions = {
+        sodium = {
+            potassium = onSodiumPlusPotassium,
+            cuivre = onSodiumPlusCuivre,
+            magnesium = onMagnesiumPlusSodium,
+        },
+        magnesium = {
+            soufre = onMagnesiumPlusSoufre,
+            sodium = onMagnesiumPlusSodium,
+            potassium = onPotassiumPlusMagnesium,
+        },
+        soufre = {
+            potassium = onSouffrePlusPotassium,
+            cuivre = onSouffrePlusCuivre,
+        },
+        potassium = {
+            sodium = onSodiumPlusPotassium,
+            magnesium = onPotassiumPlusMagnesium,
+            soufre = onPotassiumPlusSoufre,
+        },
+        cuivre = {
+            sodium = onSodiumPlusCuivre,
+            soufre = onSouffrePlusCuivre,
+        }
+    }
+
     if currentElement == "" then
         currentElement = name
     end
-    elementCount = elementCount + 1
-    if name == "sodium" and elementCount == 1 then
-        onSodium()
-    end
-    if name == "magnesium" and elementCount == 1 then
-        onMagnesium()
-    end
-    if name == "soufre" and elementCount == 1 then
-        onSouffre()
-    end
-    if elementCount == 2 then
-        if (currentElement == "sodium" and name == "potassium") or (currentElement == "potassium" and name == "sodium") then
-            onSodiumPlusPotassium()
-        end
-        if (currentElement == "sodium" and name == "cuivre") or (currentElement == "cuivre" and name == "sodium") then
-            onSodiumPlusCuivre()
-        end
-        if (currentElement == "magnesium" and name == "soufre") or (currentElement == "soufre" and name == "magnesium") then
-            onMagnesiumPlusSoufre()
-        end
-        if (currentElement == "magnesium" and name == "sodium") or (currentElement == "sodium" and name == "magnesium") then
-            onMagnesiumPlusSodium()
-        end
-        if (currentElement == "soufre" and name == "potassium") or (currentElement == "potassium" and name == "soufre") then
-            onSouffrePlusPotassium()
-        end
-        if (currentElement == "soufre" and name == "cuivre") or (currentElement == "cuivre" and name == "soufre") then
-            onSouffrePlusCuivre()
-        end
+    if elementCount == 0 and singleElementActions[name] then
+        singleElementActions[name]()
+        elementCount = elementCount + 1
+    elseif elementCount == 1 and combinedElementActions[currentElement] and combinedElementActions[currentElement][name] then
+        combinedElementActions[currentElement][name]()
+        elementCount = elementCount + 1
     end
 end
 

@@ -115,7 +115,7 @@ end
 local function onUpdate(button)
     local x, y = love.mouse.getPosition()
     if love.mouse.isDown(1) then
-        if  x > sodium.positionX and x < sodium.positionX + 71 and y > sodium.positionY and y < sodium.positionY + 71 then
+        if  x > sodium.positionX and x < sodium.positionX + 71 and y > sodium.positionY and y < sodium.positionY + 71 or isTaken.sodium == true then
             if not checkIsOneTaken() or isTaken.sodium then
                 sodium:setScalePosition(0, 0, x - 35, y - 35)
                 sodium2:setScalePosition(0.35, 0.355, x - 35, y - 35)
@@ -123,7 +123,7 @@ local function onUpdate(button)
             end
 
         end
-            if x > magnesium.positionX and x < magnesium.positionX + 71 and y > magnesium.positionY and y < magnesium.positionY + 71 then
+            if x > magnesium.positionX and x < magnesium.positionX + 71 and y > magnesium.positionY and y < magnesium.positionY + 71 or isTaken.magnesium == true then
                 if not checkIsOneTaken() or isTaken.magnesium then
                     magnesium:setScalePosition(0, 0, x - 35, y - 35)
                     magnesium2:setScalePosition(0.1, 0.1, x - 35, y - 35)
@@ -131,7 +131,7 @@ local function onUpdate(button)
                 end
 
             end
-            if x > soufre.positionX and x < soufre.positionX + 71 and y > soufre.positionY and y < soufre.positionY + 71 then
+            if x > soufre.positionX and x < soufre.positionX + 71 and y > soufre.positionY and y < soufre.positionY + 71 or isTaken.soufre == true then
                 if not checkIsOneTaken() or isTaken.soufre then
                     soufre:setScalePosition(0, 0, x - 35, y - 35)
                     soufre2:setScalePosition(0.34, 0.345, x - 35, y - 35)
@@ -139,7 +139,7 @@ local function onUpdate(button)
                 end
 
             end
-            if x > potassium.positionX and x < potassium.positionX + 71 and y > potassium.positionY and y < potassium.positionY + 71 then
+            if x > potassium.positionX and x < potassium.positionX + 71 and y > potassium.positionY and y < potassium.positionY + 71 or isTaken.potassium == true then
                 if not checkIsOneTaken() or isTaken.potassium then
                     potassium:setScalePosition(0, 0, x - 35, y - 35)
                     potassium2:setScalePosition(0.05, 0.05, x - 35, y - 35)
@@ -147,7 +147,7 @@ local function onUpdate(button)
                 end
 
             end
-        if x > cuivre.positionX and x < cuivre.positionX + 71 and y > cuivre.positionY and y < cuivre.positionY + 71 then
+        if x > cuivre.positionX and x < cuivre.positionX + 71 and y > cuivre.positionY and y < cuivre.positionY + 71 or isTaken.cuivre == true then
             if not checkIsOneTaken() or isTaken.cuivre then
                 cuivre:setScalePosition(0, 0, x - 35, y - 35)
                 cuivre2:setScalePosition(0.44, 0.45, x - 50, y - 50)
